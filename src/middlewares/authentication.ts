@@ -5,8 +5,7 @@
 
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import User from '../models/user';
-
-const secret = 'La_clave_secreta_red_social_mean_stack';
+import { env } from 'process';
 
 const checkAuth = async (req: any, res: any, next: any) => {
   let token;
@@ -17,7 +16,10 @@ const checkAuth = async (req: any, res: any, next: any) => {
     try {
       token = req.headers.authorization.split(' ')[1];
 
-      const decoded = jwt.verify(token, secret) as JwtPayload;
+      const decoded = jwt.verify(
+        token,
+        process.env.SECRET_PASS as any
+      ) as JwtPayload;
 
       req.user = await User.findById(decoded.id).select(
         '-password -token -confirmed'

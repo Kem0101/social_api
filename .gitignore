@@ -3,6 +3,8 @@
 /public
 /uploads
 
+.env
+
 **.DS_Store
 
 Notas de codigo.txt
