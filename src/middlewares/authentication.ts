@@ -7,6 +7,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import User from '../models/user';
 import { env } from 'process';
 
+const SECRET_PASS = process.env.SECRET_PASS;
+
 const checkAuth = async (req: any, res: any, next: any) => {
   let token;
   if (
@@ -16,10 +18,7 @@ const checkAuth = async (req: any, res: any, next: any) => {
     try {
       token = req.headers.authorization.split(' ')[1];
 
-      const decoded = jwt.verify(
-        token,
-        process.env.SECRET_PASS as any
-      ) as JwtPayload;
+      const decoded = jwt.verify(token, SECRET_PASS as string) as JwtPayload;
 
       req.user = await User.findById(decoded.id).select(
         '-password -token -confirmed'
