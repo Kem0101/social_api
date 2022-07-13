@@ -1,0 +1,12 @@
+/node_modules
+/dist
+/public
+/uploads
+
+**.DS_Store
+
+Notas de codigo.txt
+Notas.txt
+package-lock.json
+package.json
+tsconfig.json
